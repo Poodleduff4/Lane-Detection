@@ -196,7 +196,7 @@ def combined_loss(preds, targets, w_bce=0.2, w_tversky=0.5, w_focal=0.3):
     return total_loss
 
 # Use the same criterion as in training
-criterion = combined_loss
+criterion = BCELoss()
 
 # Load validation data
 val_image_dir = '/home/ubuntu/deeplanes/root/images/val/val/val'
