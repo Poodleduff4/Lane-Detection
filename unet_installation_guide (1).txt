@@ -29,7 +29,7 @@ U-Net Lane Detection Installation Guide:
 
 6. Run the model with the following command (there is an example image provided in the script):
 
-	python inference.py
+	python model_1_inference.py or python model_2_inference.py based on which model you are running
 
 7. There are some example images in the "images" directory to test different images or video add said files into the "images" directory
 and open the "inference.py" script and change the following line to the match your new image title
@@ -37,6 +37,8 @@ and open the "inference.py" script and change the following line to the match yo
 	image_path = 'images\\1_ahAGKqE3LNw-Ze1BIU0a9Q.jpg'
 
 8. Repeat step 6
+
+9. If you are attemping to run either video_inference.py or yolo_detection.py, you may need to rename model_1.py or model_2.py to model.py. 
 
 
 
