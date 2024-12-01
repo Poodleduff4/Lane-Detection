@@ -1,11 +1,9 @@
-
 from PIL import Image
 import torch
 import torchvision.transforms as transforms
 import torch.nn as nn
 import matplotlib.pyplot as plt
 import numpy as np
-from PIL import Image
 import os
 
 plt.style.use('dark_background')
@@ -80,17 +78,18 @@ transform = transforms.Compose([
 
 # Function to preprocess the image and mask
 def preprocess(image_path, mask_path):
+    ## Convert and resize images for model input
     image = Image.open(image_path).convert('RGB')
-    mask = Image.open(mask_path).convert('L')  # Grayscale for mask
-    original_size = image.size  # Keep original size
+    mask = Image.open(mask_path).convert('L')  
+    original_size = image.size
     image = transform(image)
-    # mask = transform(mask)
     return image, mask, original_size
 
 # Function to post-process the output
 def postprocess(output, original_size):
+    ## Convert model output to viewable image
     output = output.squeeze().cpu().numpy()
-    output = np.uint8(output * 255)  # Scale to 0-255
+    output = np.uint8(output * 255)  # Convert to grayscale 8-bit image
     output = Image.fromarray(output).resize(original_size, Image.BILINEAR)
     output = np.array(output)
     return output
@@ -98,7 +97,6 @@ def postprocess(output, original_size):
 # Function to display the results
 def display_results(image_path, mask_path, predicted_mask):
     original_image = Image.open(image_path).convert('RGB')
-    # ground_truth_mask = Image.open(mask_path).convert('L')
     
     plt.figure(figsize=(15, 5))
     
@@ -106,11 +104,6 @@ def display_results(image_path, mask_path, predicted_mask):
     plt.title("Original Image")
     plt.imshow(original_image)
     plt.axis('off')
-    
-    # plt.subplot(1, 3, 2)
-    # plt.title("Ground Truth Mask")
-    # plt.imshow(ground_truth_mask,cmap="gray")
-    # plt.axis('off')
     
     plt.subplot(1, 3, 3)
     plt.title("Predicted Mask")
@@ -121,19 +114,13 @@ def display_results(image_path, mask_path, predicted_mask):
 
 def run_inference(image_path, mask_path):
     image, mask, original_size = preprocess(image_path, mask_path)
-    image = image.unsqueeze(0)  # Add batch dimension, no need to move to GPU
+    image = image.unsqueeze(0)  # Add batch dimension
     
     with torch.no_grad():
         output = model(image)
         output = torch.sigmoid(output)  # Apply sigmoid to get probabilities
     
     predicted_mask = postprocess(output, original_size)
-    
-    # Save predicted mask
-    # save_folder = '../output/'
-    # os.makedirs(save_folder, exist_ok=True)
-    # predicted_mask_image = Image.fromarray(predicted_mask)
-    # predicted_mask_image.save(os.path.join(save_folder, os.path.basename(mask_path)))
     
     display_results(image_path, mask_path, predicted_mask)
 
