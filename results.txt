@@ -1,3 +1,0 @@
-Validation Jaccard Score (IoU): 0.9934
-Validation Accuracy: 0.9934
-Validation F1 Score: 0.9967
