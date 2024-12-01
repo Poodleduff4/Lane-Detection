@@ -167,7 +167,7 @@ class CULANEDataset(torch.utils.data.Dataset):
 
 # Load the trained model
 model = TransUNet(img_size=224, in_channels=3, out_channels=1).cuda()
-model.load_state_dict(torch.load('./best_unet_lane_detection.pth')['model_state_dict'])
+model.load_state_dict(torch.load('./unet_lane_detection_epoch_10.pth')['model_state_dict'])
 model.eval()
 
 # Define loss function
