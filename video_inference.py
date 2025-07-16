@@ -6,7 +6,7 @@ import imageio
 from PIL import Image
 import torch
 import torchvision.transforms as transforms
-from model_1 import TransUNet  # Your model file
+from model_2 import TransUNet  # Use TransUNet definition
 
 def process_frame(frame, model, transform):
     ## Convert frame (numpy array) to PIL Image
