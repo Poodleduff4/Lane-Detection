@@ -29,7 +29,7 @@ Both models are trained and evaluated on the **[CULane dataset](https://xingangp
 1.  Environment (Python 3.10)
     ```bash
     python -m venv venv && source venv/bin/activate  # or use Conda
-    pip install -r unet_requirements.txt
+    pip install -r requirements.txt
     ```
 2.  Training (example for TransUNet – adjust paths for CULane)
     ```bash
