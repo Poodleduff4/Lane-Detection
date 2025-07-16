@@ -14,9 +14,9 @@ Both models are trained and evaluated on the **[CULane dataset](https://xingangp
 
 | Path | Purpose |
 |------|---------|
-| `model_1_train.py` / `model_1_inference.py` | U-Net training & inference scripts |
-| `model_2_train.py` / `model_2_inference.py` | TransUNet training & inference |
-| `model_2.py` | Stand-alone definition of the `TransUNet` network |
+| `unet/unet_train.py` / `unet/unet_inference.py` | U-Net training & inference scripts |
+| `transunet/transunet_train.py` / `transunet/transunet_inference.py` | TransUNet training & inference |
+| `transunet.py` | Stand-alone definition of the `TransUNet` network |
 | `video_inference.py` | Overlay predictions onto a driving video |
 | `yolo_detection.py` | Legacy YOLOv5 baseline (kept for comparison) |
 | `unet_requirements.txt` | Reproducible Python dependencies |
@@ -33,13 +33,13 @@ Both models are trained and evaluated on the **[CULane dataset](https://xingangp
     ```
 2.  Training (example for TransUNet – adjust paths for CULane)
     ```bash
-    python model_2_train.py \
+    python transunet/transunet_train.py \
         --images_dir /path/to/CULane/images/train \
         --masks_dir  /path/to/CULane/laneseg_label_w16/train
     ```
 3.  Single-frame inference
     ```bash
-    python model_2_inference.py --weight best_unet_lane_detection.pth \
+    python transunet/transunet_inference.py --weight best_unet_lane_detection.pth \
         --image tests/frame.jpg --out results/frame_mask.png
     ```
 4.  Video overlay
